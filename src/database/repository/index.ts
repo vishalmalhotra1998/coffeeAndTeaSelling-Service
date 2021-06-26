@@ -1,0 +1,1 @@
+export { CoffeeRepository } from './coffee';

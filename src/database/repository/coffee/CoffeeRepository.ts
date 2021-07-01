@@ -12,11 +12,19 @@ class CoffeeRepository {
   };
   create = async (data: ICoffeeSchema): Promise<ICoffeeSchema> => {
     const id = this.generateObjectId();
-    return this.coffeModel.create({ ...data, _id: id, originalId: id });
+    return this.coffeModel.create({ ...data, _id: id, originalId: id, about: id });
   };
+  bulkCreate = (data: [ICoffeeSchema]): Promise<ICoffeeSchema[]>  => {
+    const newRefinedData: ICoffeeSchema[]  = [];
+    data.forEach((ele: any) => {
+      const id = this.generateObjectId();
+      newRefinedData.push({ ...ele, _id: id, originalId: id, about: id });
+    });
+    return this.coffeModel.insertMany([...newRefinedData]);
+  }
   list = async (key?: any, projection?: any, options?: any) => {
     console.log({ key, projection, options });
-    return this.coffeModel.find(key, projection , options);
+    return this.coffeModel.find(key, projection , options).populate('originalId', 'advisory disadvantage');
   };
 }
 

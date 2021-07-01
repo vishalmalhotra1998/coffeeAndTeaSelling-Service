@@ -1,8 +1,10 @@
 import { Router } from 'express';
 import { route as coffeeRouter } from './controllers/coffee/routes';
+import { route as aboutRouter } from './controllers/about/routes';
 
 const rootRouter = Router();
-console.log('::::::running:::::::::');
 rootRouter.use('/coffee', coffeeRouter);
+rootRouter.use('/about', aboutRouter);
+//tea model 
 
 export { rootRouter };

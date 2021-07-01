@@ -8,4 +8,11 @@ export interface ICoffeeSchema {
   discount: number;
   grams: string;
   bestSeller: boolean;
+  organic: string;
+  retailer: string;
+  roster: string;
+  yearFounded: number;
+  subsidiaryBrands: string;
+  imageUrl: string;
+  about: string;
 }

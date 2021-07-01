@@ -20,7 +20,9 @@ class CoffeeController {
       const postData = await this.coffeeRepository.create(body);
       console.log({ postData });
       res.send({
-        data: postData
+        data: postData,
+        status: 200,
+        message: 'successfully created'
       });
     }
     catch (error) {
@@ -31,11 +33,11 @@ class CoffeeController {
   list = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { skip = 0, limit = 10, sortBy , ...query } = req.query;
-      const search: any = req.query.search;
+      const search: any = req.query && req.query.search;
       const options = { skip: Number(skip), limit: Number(limit), sort: sortBy };
-      const projection = {_id: 0 };
+      const projection = {};
       let filter;
-      if (search.split(',').length > 1) {
+      if (search && search.split(',').length > 1) {
        const splittedData = search.split(',');
        filter  = handleSearchData(splittedData);
       }
